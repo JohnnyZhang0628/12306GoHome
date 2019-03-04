@@ -68,7 +68,7 @@ namespace train12306
             radNormal.Checked = true;
 
             #region 加载站点
-            var stations = File.ReadAllText("../../data/station_name.js");
+            var stations = File.ReadAllText("data/station_name.js");
             dtStation = JsonConvert.DeserializeObject<DataTable>(stations);
             cmbFromStation.DataSource = dtStation;
             cmbFromStation.DisplayMember = "cityName";

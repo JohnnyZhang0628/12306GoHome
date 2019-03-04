@@ -27,7 +27,7 @@
     <TargetCulture>zh-Hans</TargetCulture>
     <ProductName>归途</ProductName>
     <PublisherName>怎一个强字了得</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\station_name.js" />
-    <Content Include="icon.ico" />
     <Content Include="image\aliPay.jpg" />
     <Content Include="image\GoHome.jpg" />
     <Content Include="image\icon.ico" />
