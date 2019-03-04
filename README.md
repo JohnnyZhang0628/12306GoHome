@@ -1,5 +1,5 @@
 ﻿# 12306GoHome
-2019自动抢票CS版
+2019自动抢票CS版,帮助大家的麻烦点一个star.
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/login.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/main.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/success.png)
