@@ -1,9 +1,9 @@
 ﻿# 12306GoHome
 2019自动抢票CS版
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/login.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/main.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/success.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/order.png)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/login.png)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/main.png)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/success.png)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/order.png)
 ## 软件标题：归途
 ## 版本号：V1.0.0
 ## 作者：怎一个强子了得
@@ -22,5 +22,5 @@
 ## 最后希望我的努力，能增加大家与家人团聚的机会。
 ## 软件是工作之余写的，水平有限，只为学习使用，切勿用作商业用途。
 ## 本软件不收取任何费用，完全开源，有钱捧个钱场，没钱捧个人场吧！
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/aliPay.jpg)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/wxPay.jpg)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/aliPay.jpg)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/wxPay.jpg)
