@@ -1,5 +1,5 @@
 ﻿# 12306GoHome
-2019自动抢票CS版
+## 2019自动抢票CS版,点击Clone or download 下载，点击Clone or download 下载，点击Clone or download 下载。重要的事情说三遍
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/login.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/main.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/success.png)

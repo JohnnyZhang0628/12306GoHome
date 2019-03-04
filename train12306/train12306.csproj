@@ -27,7 +27,7 @@
     <TargetCulture>zh-Hans</TargetCulture>
     <ProductName>归途</ProductName>
     <PublisherName>怎一个强字了得</PublisherName>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

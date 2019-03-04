@@ -125,7 +125,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 17);
             this.label4.TabIndex = 8;
-            this.label4.Text = "看不起？换一张";
+            this.label4.Text = "看不清？换一张";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // FrmLogin
