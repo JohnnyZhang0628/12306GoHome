@@ -1,10 +1,15 @@
+﻿
 ﻿# 12306GoHome
 ## 2019自动抢票CS版,点击Clone or download 下载，点击Clone or download 下载，点击Clone or download 下载。重要的事情说三遍
 2019自动抢票CS版,帮助大家的麻烦点一个star.
+
+## 2019-03-05 版本：1.0.0.8 新增双击车次查看价格、新增双击出发站查看停靠站、修改出发站、终点站搜索BUG问题。
+
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/login.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/main.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/success.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/order.png)
+
 ## 软件标题：归途
 ## 版本号：V1.0.0
 ## 作者：怎一个强子了得
