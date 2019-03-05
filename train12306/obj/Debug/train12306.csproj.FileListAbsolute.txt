@@ -57,3 +57,5 @@ D:\WorkSpace\train12306\12306GoHome\train12306\obj\Debug\train12306.application
 D:\WorkSpace\train12306\12306GoHome\train12306\obj\Debug\train12306.csproj.CopyComplete
 D:\WorkSpace\train12306\12306GoHome\train12306\obj\Debug\train12306.exe
 D:\WorkSpace\train12306\12306GoHome\train12306\obj\Debug\train12306.pdb
+D:\WorkSpace\train12306\12306GoHome\train12306\obj\Debug\train12306.FrmPrice.resources
+D:\WorkSpace\train12306\12306GoHome\train12306\obj\Debug\train12306.FrmStation.resources

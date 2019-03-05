@@ -1,24 +1,17 @@
 ﻿# 12306GoHome
-<<<<<<< HEAD
 ## 2019自动抢票CS版,点击Clone or download 下载，点击Clone or download 下载，点击Clone or download 下载。重要的事情说三遍
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/login.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/main.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/success.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/tree/master/train12306/image/order.png)
-=======
 2019自动抢票CS版,帮助大家的麻烦点一个star.
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/login.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/main.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/success.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/order.png)
->>>>>>> 16b149e3c823568a1e55a34b2a116fe00b75f935
 ## 软件标题：归途
 ## 版本号：V1.0.0
 ## 作者：怎一个强子了得
 ## 邮箱：237183141@qq.com
-## 语言：基于.net frameword4.5 开发的，代码写的简单，没有使用其他的框架。
+## 语言：基于.net framework4.5 开发的，代码写的简单，没有使用其他的框架。
 ## 更新状态：软件作者可能会不定期更新。
-## 安装：直接在release文件夹setup.exe 安装。
+## 安装：直接在release文件夹setup.exe 安装（或者application files/trian12306/trian12306.exe 直接打开免安装）。
 
 ## 目的：作者老家河南固始的，现在上海从事软件开发工作。本人也是一个恋家的人，但是读完大学，不想就这么回老家，
 ## 想在上海打拼一番，但是逢年过节，守着时间点抢票经常也是无功而返。

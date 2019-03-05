@@ -1,1 +1,109 @@
-﻿
+﻿日期:2019-03-05 15:00:01
+错误信息：Object serialized to String. JObject instance expected.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.Linq.JObject.FromObject(Object o, JsonSerializer jsonSerializer)
+   在 Newtonsoft.Json.Linq.JObject.FromObject(Object o)
+   在 train12306.FrmPrice..ctor(String train_no, String from_station_no, String to_station_no, String date, String seat_types)
+   在 train12306.FrmMain.dgvResult_CellDoubleClick(Object sender, DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnCellDoubleClick(DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnDoubleClick(EventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.DataGridView.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 train12306.Program.Main()
+日期:2019-03-05 15:00:48
+错误信息：未将对象引用设置到对象的实例。
+错误来源：train12306
+错误栈堆：   在 train12306.FrmPrice..ctor(String train_no, String from_station_no, String to_station_no, String date, String seat_types) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmPrice.cs:行号 24
+   在 train12306.FrmMain.dgvResult_CellDoubleClick(Object sender, DataGridViewCellEventArgs e) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmMain.cs:行号 657
+   在 System.Windows.Forms.DataGridView.OnCellDoubleClick(DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnDoubleClick(EventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.DataGridView.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 train12306.Program.Main() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Program.cs:行号 19
+日期:2019-03-05 15:02:07
+错误信息：Object serialized to String. JObject instance expected.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.Linq.JObject.FromObject(Object o, JsonSerializer jsonSerializer)
+   在 Newtonsoft.Json.Linq.JObject.FromObject(Object o)
+   在 train12306.FrmStation..ctor(String train_no, String from_station_no, String to_station_no, String date) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmStation.cs:行号 21
+   在 train12306.FrmMain.dgvResult_CellDoubleClick(Object sender, DataGridViewCellEventArgs e) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmMain.cs:行号 668
+   在 System.Windows.Forms.DataGridView.OnCellDoubleClick(DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnDoubleClick(EventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.DataGridView.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 train12306.Program.Main() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Program.cs:行号 19
+日期:2019-03-05 15:03:01
+错误信息：Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.FrmStation..ctor(String train_no, String from_station_no, String to_station_no, String date) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmStation.cs:行号 21
+   在 train12306.FrmMain.dgvResult_CellDoubleClick(Object sender, DataGridViewCellEventArgs e) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmMain.cs:行号 668
+   在 System.Windows.Forms.DataGridView.OnCellDoubleClick(DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnDoubleClick(EventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.DataGridView.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 train12306.Program.Main() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Program.cs:行号 19
+日期:2019-03-05 15:18:27
+错误信息：Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.FrmStation..ctor(String train_no, String from_station_no, String to_station_no, String date)
+   在 train12306.FrmMain.dgvResult_CellDoubleClick(Object sender, DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnCellDoubleClick(DataGridViewCellEventArgs e)
+   在 System.Windows.Forms.DataGridView.OnDoubleClick(EventArgs e)
+   在 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 System.Windows.Forms.DataGridView.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   在 System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   在 System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(IntPtr dwComponentID, Int32 reason, Int32 pvLoopData)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   在 System.Windows.Forms.Application.Run(Form mainForm)
+   在 train12306.Program.Main()

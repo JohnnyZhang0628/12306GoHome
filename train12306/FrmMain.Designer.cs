@@ -223,7 +223,6 @@
             this.cmbToStation.Name = "cmbToStation";
             this.cmbToStation.Size = new System.Drawing.Size(140, 25);
             this.cmbToStation.TabIndex = 3;
-            this.cmbToStation.TextUpdate += new System.EventHandler(this.cmbToStation_TextUpdate);
             // 
             // label2
             // 
@@ -242,7 +241,6 @@
             this.cmbFromStation.Name = "cmbFromStation";
             this.cmbFromStation.Size = new System.Drawing.Size(140, 25);
             this.cmbFromStation.TabIndex = 1;
-            this.cmbFromStation.TextUpdate += new System.EventHandler(this.cmbFromStation_TextUpdate);
             // 
             // label1
             // 
@@ -273,6 +271,7 @@
             this.dgvResult.RowTemplate.Height = 23;
             this.dgvResult.Size = new System.Drawing.Size(1173, 365);
             this.dgvResult.TabIndex = 0;
+            this.dgvResult.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellDoubleClick);
             // 
             // groupBox3
             // 

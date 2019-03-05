@@ -73,12 +73,14 @@ namespace train12306
             cmbFromStation.DataSource = dtStation;
             cmbFromStation.DisplayMember = "cityName";
             cmbFromStation.ValueMember = "value";
-            cmbFromStation.Text = "";
+            cmbFromStation.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbFromStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 
             cmbToStation.DataSource = dtStation.Copy();
             cmbToStation.DisplayMember = "cityName";
             cmbToStation.ValueMember = "value";
-            cmbToStation.Text = "";
+            cmbToStation.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbToStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 
             #endregion
 
@@ -199,6 +201,7 @@ namespace train12306
                             });
                         }
                         dgvResult.DataSource = searchResult;
+                        dgvResult.AllowUserToOrderColumns = true;
 
 
                         chkTrainNo.DataSource = searchResult;
@@ -208,12 +211,13 @@ namespace train12306
 
 
                         dgvResult.Columns["train_name"].HeaderText = "车次";
+                        dgvResult.Columns["train_name"].ToolTipText = "双击查看价格";
                         dgvResult.Columns["from_station_name"].HeaderText = "始发站";
+                        dgvResult.Columns["from_station_name"].ToolTipText = "双击查看停靠站";
                         dgvResult.Columns["to_station_name"].HeaderText = "终点站";
                         dgvResult.Columns["from_time"].HeaderText = "出发时间";
                         dgvResult.Columns["to_time"].HeaderText = "到达时间";
                         dgvResult.Columns["total_time"].HeaderText = "历时";
-                        dgvResult.Columns["total_time"].SortMode = DataGridViewColumnSortMode.Automatic; //用户可以对时间排序
                         dgvResult.Columns["business_seat"].HeaderText = "商务座";
                         dgvResult.Columns["first_class_seat"].HeaderText = "一等座";
                         dgvResult.Columns["second_class_seat"].HeaderText = "二等座";
@@ -260,20 +264,6 @@ namespace train12306
                 return "";
         }
 
-        // 查找站名
-        DataTable searchStation(string keyWord)
-        {
-            if (keyWord == "")
-                return dtStation;
-            var query = dtStation.Select($" cityName like'%{keyWord}%' or pinYin like'%{keyWord}%' or py like'%{keyWord}%' ");
-            if (query != null && query.Length > 0)
-            {
-                return query.CopyToDataTable();
-            }
-            else
-                return new DataTable();
-        }
-
         // 切换出发站和终点站
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -283,25 +273,6 @@ namespace train12306
             cmbFromStation.SelectedValue = to_station;
         }
 
-        private void cmbFromStation_TextUpdate(object sender, EventArgs e)
-        {
-            string keyWord = cmbFromStation.Text;
-            cmbFromStation.DataSource = searchStation(keyWord);
-            cmbFromStation.DisplayMember = "cityName";
-            cmbFromStation.ValueMember = "value";
-            cmbFromStation.DroppedDown = true;
-            this.Cursor = Cursors.Default;
-        }
-
-        private void cmbToStation_TextUpdate(object sender, EventArgs e)
-        {
-            string keyWord = cmbToStation.Text;
-            cmbToStation.DataSource = searchStation(keyWord);
-            cmbToStation.DisplayMember = "cityName";
-            cmbToStation.ValueMember = "value";
-            cmbToStation.DroppedDown = true;
-            this.Cursor = Cursors.Default;
-        }
 
         //刷票 1.先选乘客，2.查票,3自动提交。每一步之间隔3s左右
         // 否则出票失败
@@ -351,9 +322,6 @@ namespace train12306
         // 买票
         private void BuyTicket()
         {
-            // 查票
-            // btnSearch.PerformClick();
-
             string json = _requestHelper.GetData("post", confUrl);
             if (json != null && isJson(json))
             {
@@ -397,6 +365,8 @@ namespace train12306
                         {
                             // 自动提交信息
 
+                            txtMessage.AppendText($"未查询到{ train["from_station_name"].ToString()}" +
+                $"到{train["to_station_name"].ToString()}的{train["train_name"].ToString()}列车。正在为您提交。。。\r\n");
                             paramsData.Add("secretStr", train["secretStr"].ToString());
                             paramsData.Add("train_date", trainDate.Value.ToString("yyyy-MM-dd"));
                             paramsData.Add("tour_flag", "dc");
@@ -436,11 +406,11 @@ namespace train12306
                                 {
 
                                     string[] resultList = obj["data"]["result"].ToString().Split('#');
-                                  
+
 
                                     #region 保存到队列中
                                     paramsData.Clear();
-                                    if(obj["data"]["ifShowPassCode"].ToString()=="Y")
+                                    if (obj["data"]["ifShowPassCode"].ToString() == "Y")
                                     {
                                         int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
                                         int intervalTime = ifShowPassCodeTime / timer_time;
@@ -478,12 +448,12 @@ namespace train12306
                                             #region 确认订单
 
                                             paramsData.Clear();
-                                            paramsData.Add("passengerTicketStr",HttpUtility.UrlEncode(passengerTicketStr,Encoding.UTF8).ToUpper());
-                                            paramsData.Add("oldPassengerStr",HttpUtility.UrlEncode(oldPassengerStr, Encoding.UTF8).ToUpper());
+                                            paramsData.Add("passengerTicketStr", HttpUtility.UrlEncode(passengerTicketStr, Encoding.UTF8).ToUpper());
+                                            paramsData.Add("oldPassengerStr", HttpUtility.UrlEncode(oldPassengerStr, Encoding.UTF8).ToUpper());
                                             paramsData.Add("randCode", "");
                                             paramsData.Add("purpose_codes", purpose_codes);
                                             paramsData.Add("key_check_isChange", resultList[1]);
-                                            paramsData.Add("leftTicketStr",resultList[2]);
+                                            paramsData.Add("leftTicketStr", resultList[2]);
                                             paramsData.Add("train_location", resultList[0]);
                                             paramsData.Add("choose_seats", "");
                                             paramsData.Add("seatDetailType", "");
@@ -537,6 +507,9 @@ namespace train12306
 
 
                         }
+                        else
+                            txtMessage.AppendText($"未查询到{ train["from_station_name"].ToString()}" +
+                                            $"到{train["to_station_name"].ToString()}的{train["train_name"].ToString()}列车。\r\n");
                     }
 
 
@@ -664,12 +637,37 @@ namespace train12306
             BuyTicket();
         }
 
-
         private void label8_Click(object sender, EventArgs e)
         {
             //加载乘客
             getPassenger();
             Thread.Sleep(3000);
+        }
+
+        private void dgvResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex==0&&e.RowIndex>-1)
+            {
+                // 查看票价
+                string train_no = dgvResult.Rows[e.RowIndex].Cells["train_no"].Value.ToString();
+                string from_station_no = dgvResult.Rows[e.RowIndex].Cells["from_station_no"].Value.ToString();
+                string to_station_no = dgvResult.Rows[e.RowIndex].Cells["to_station_no"].Value.ToString();
+                string date = trainDate.Value.ToString("yyyy-MM-dd");
+                string seat_types = dgvResult.Rows[e.RowIndex].Cells["seat_type"].Value.ToString();
+                FrmPrice price = new FrmPrice(train_no,from_station_no,to_station_no,date,seat_types);
+                price.Show();
+     
+            }
+            else if (e.ColumnIndex == 2&&e.RowIndex>-1)
+            {
+                // 查看站点
+                string train_no = dgvResult.Rows[e.RowIndex].Cells["train_no"].Value.ToString();
+                string from_station_no = dgvResult.Rows[e.RowIndex].Cells["from_station"].Value.ToString();
+                string to_station_no = dgvResult.Rows[e.RowIndex].Cells["to_station"].Value.ToString();
+                string date = trainDate.Value.ToString("yyyy-MM-dd");
+                FrmStation station = new FrmStation(train_no, from_station_no, to_station_no, date);
+                station.Show();
+            }
         }
     }
 

@@ -27,7 +27,7 @@
     <TargetCulture>zh-Hans</TargetCulture>
     <ProductName>归途</ProductName>
     <PublisherName>怎一个强字了得</PublisherName>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -113,6 +113,18 @@
     <Compile Include="FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPrice.Designer.cs">
+      <DependentUpon>FrmPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStation.Designer.cs">
+      <DependentUpon>FrmStation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestHelper.cs" />
@@ -127,6 +139,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPrice.resx">
+      <DependentUpon>FrmPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmStation.resx">
+      <DependentUpon>FrmStation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
