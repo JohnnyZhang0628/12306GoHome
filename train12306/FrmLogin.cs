@@ -12,26 +12,17 @@ namespace train12306
 {
     public partial class FrmLogin : Form
     {
-        // 获取验证码
-        readonly string getValidateUrl = "https://kyfw.12306.cn/passport/captcha/captcha-image64?login_site=E&module=login&rand=sjrand&1544537823136&callback=jQuery19108971268305393201_1544537730528";
-
-        // 登录url
-        readonly string loginUrl = "https://kyfw.12306.cn/passport/web/login";
-        // 获取token 
-        readonly string authUrl = "https://kyfw.12306.cn/passport/web/auth/uamtk";
-        // 授权
-        readonly string authClientUrl = "https://kyfw.12306.cn/otn/uamauthclient";
+    
 
         RequestHelper _requestHelper = new RequestHelper();
 
         Brush bush = new SolidBrush(Color.Red);//填充的颜色
 
-        string answer = "";
+        string answer = ""; //验证码答案
 
         public FrmLogin()
         {
             InitializeComponent();
-
 
             //加载广告
             this.Hide();
@@ -39,7 +30,47 @@ namespace train12306
             adver.Show();
 
 
-            Thread.Sleep(3000);
+            //动态加载查票url
+            using (StreamReader sr = new StreamReader(_requestHelper.GetStream("get", Api12306.init, "")))
+            {
+                string line = sr.ReadLine();
+                while (line != null)
+                {
+                    if (line.IndexOf("ctx") > -1)
+                    {
+                        Api12306.ctx = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+
+                    if (line.IndexOf("CLeftTicketUrl ") > -1)
+                    {
+                        Api12306.queryTicketUrl = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+                    if (line.IndexOf("passport_login ") > -1)
+                    {
+                        Api12306.passport_login = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+                    if (line.IndexOf("passport_captcha ") > -1)
+                    {
+                        Api12306.passport_captcha = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+
+                    if (line.IndexOf("passport_authuam ") > -1)
+                    {
+                        Api12306.passport_authuam = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+                    if (line.IndexOf("passport_captcha_check ") > -1)
+                    {
+                        Api12306.passport_captcha_check =  line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+                    if (line.IndexOf("passport_authclient ") > -1)
+                    {
+                        Api12306.passport_authclient = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                    }
+
+                    line = sr.ReadLine();
+                }
+            }
+
             adver.Close();
             this.Show();
 
@@ -76,59 +107,77 @@ namespace train12306
                 return;
             }
 
-            string json = _requestHelper.GetData("post", loginUrl, $"username={username}&password={password }&appid=otn&answer={answer}");
-            if (Convert.ToInt32(JObject.Parse(json)["result_code"]) == 0)
+            string json = _requestHelper.GetData("post", Api12306.passport_login, $"username={username}&password={password }&appid=otn&answer={answer}");
+            if (json != null && Common.IsJson(json))
             {
-                json = _requestHelper.GetData("post", authUrl, "appid=otn");
-
                 if (Convert.ToInt32(JObject.Parse(json)["result_code"]) == 0)
                 {
-                    json = _requestHelper.GetData("post", authClientUrl, "tk=" + JObject.Parse(json)["newapptk"]);
+                    json = _requestHelper.GetData("post", Api12306.passport_authuam, "appid=otn");
+
                     if (Convert.ToInt32(JObject.Parse(json)["result_code"]) == 0)
                     {
-                        this.Hide();
-                        FrmMain main = new FrmMain();
-                        main.Show();
+                        json = _requestHelper.GetData("post", Api12306.getAuthclient(), "tk=" + JObject.Parse(json)["newapptk"]);
+                        if (Convert.ToInt32(JObject.Parse(json)["result_code"]) == 0)
+                        {
+                            this.Hide();
+                            FrmMain main = new FrmMain();
+                            main.Show();
+                        }
+
                     }
 
                 }
-
+                lblError.Text = JObject.Parse(json)["result_message"].ToString();
+                GetValidateCode();
             }
-            lblError.Text = JObject.Parse(json)["result_message"].ToString();
-            GetValidateCode();
+            else
+            {
+                MessageBox.Show("登录失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         void GetValidateCode()
         {
             answer = "";
-            string json = _requestHelper.GetData("get", getValidateUrl);
-            if (json != null)
+            string json = _requestHelper.GetData("get", Api12306.getCaptcha());
+            if (json != null&&Common.IsJson(json))
             {
-                var obj = JObject.Parse(json.Replace("/**/jQuery19108971268305393201_1544537730528(", "").Replace(");", ""));
+                var obj = JObject.Parse(json);
                 if (obj["result_code"].ToString() == "0")
                 {
                     picValidate.Image = Image.FromStream(GetImageFromBase64(obj["image"].ToString()));
                 }
                 else
+                {
                     MessageBox.Show(obj["result_message"].ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GetValidateCode();
+                }
             }
             else
             {
                 MessageBox.Show("加载验证码失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GetValidateCode();
             }
 
         }
 
         bool CheckValidateCode()
         {
-            string url = "https://kyfw.12306.cn/passport/captcha/captcha-check?callback=jQuery19108008943653920897_1544618479368&answer=" + answer + "&rand=sjrand&login_site=E";
-            string json = _requestHelper.GetData("get", url);
-            json = json.Replace("/**/jQuery19108008943653920897_1544618479368(", "").Replace(");", "");
-            if (JObject.Parse(json)["result_code"].ToString() == "4")
-                return true;
+            string json = _requestHelper.GetData("get", Api12306.getCaptchaCheck()+"&answer="+answer);
+            if (json != null && Common.IsJson(json))
+            {
+                if (JObject.Parse(json)["result_code"].ToString() == "4")
+                    return true;
+                else
+                {
+                    MessageBox.Show(JObject.Parse(json)["result_message"].ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GetValidateCode();
+                    return false;
+                }
+            }
             else
             {
-                MessageBox.Show(JObject.Parse(json)["result_message"].ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("网络异常！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 GetValidateCode();
                 return false;
             }

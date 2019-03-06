@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -10,13 +9,13 @@ namespace train12306
         public FrmPrice(string train_no, string from_station_no, string to_station_no, string date,string seat_types)
         {
             InitializeComponent();
-            string url = "https://kyfw.12306.cn/otn/leftTicket/queryTicketPrice?train_no="+train_no
+            string url = Api12306.queryTicketPrice+"?train_no="+train_no
             +"&from_station_no="+from_station_no+"&to_station_no="+to_station_no+"&seat_types="+seat_types
             +"&train_date="+date;
 
             RequestHelper helper = new RequestHelper();
             string json = helper.GetData("get", url);
-            if (json != null)
+            if (json != null&&Common.IsJson(json))
             {
                 var obj = JObject.Parse(json);
                 if (bool.Parse(obj["status"].ToString()))

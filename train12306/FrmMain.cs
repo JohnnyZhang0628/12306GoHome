@@ -9,26 +9,13 @@ using System.Threading;
 using System.Globalization;
 using System.Web;
 using System.Text;
+using System.Media;
 
 namespace train12306
 {
     public partial class FrmMain : Form
     {
 
-        // 加载乘客信息
-        readonly string getPassengerUlr = "https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs";
-        // 自动提交
-        readonly string autoSubmitOrderRequestUrl = "https://kyfw.12306.cn/otn/confirmPassenger/autoSubmitOrderRequest";
-        // 保存队列
-        readonly string getQueueCountAsyncUrl = "https://kyfw.12306.cn/otn/confirmPassenger/getQueueCountAsync";
-        // 确认订单
-        readonly string confirmSingleForQueueAsysUrl = "https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueueAsys";
-
-        // 登录状态
-        readonly string confUrl = "https://kyfw.12306.cn/otn/login/conf";
-
-        //查票接口url
-        string queryTicketUrl = "";
 
         //timer
         int timer_time = 3;
@@ -101,23 +88,6 @@ namespace train12306
             trainDate.MinDate = DateTime.Now;
             trainDate.MaxDate = DateTime.Now.AddDays(29);
 
-
-            //动态加载查票url
-            using (StreamReader sr = new StreamReader(_requestHelper.GetStream("get", "https://kyfw.12306.cn/otn/leftTicket/init", "")))
-            {
-                string line = sr.ReadLine();
-               while (line!=null)
-                {
-                    if(line.IndexOf("CLeftTicketUrl")>-1)
-                    {
-                        queryTicketUrl = "https://kyfw.12306.cn/otn/"+line.Split('=')[1].Replace(" ","").Replace(";","").Replace("'","");
-                        break;
-                    }
-                    line = sr.ReadLine();
-                }
-            }  
-           
-
         }
         //查询
         private void btnSearch_Click(object sender, EventArgs e)
@@ -126,7 +96,7 @@ namespace train12306
             string from_station = cmbFromStation.SelectedValue.ToString();
             if (from_station == "")
             {
-                MessageBox.Show("出发站不能为空！","错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("出发站不能为空！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string to_station = cmbToStation.SelectedValue.ToString();
@@ -139,10 +109,10 @@ namespace train12306
             if (radStudent.Checked)
                 purpose_codes = "0X00";
 
-           string url = queryTicketUrl+ $"?leftTicketDTO.train_date={ train_date }&leftTicketDTO.from_station={from_station }&leftTicketDTO.to_station={to_station }&purpose_codes={ purpose_codes}";
+            string url = Api12306.getQuery() + $"?leftTicketDTO.train_date={ train_date }&leftTicketDTO.from_station={from_station }&leftTicketDTO.to_station={to_station }&purpose_codes={ purpose_codes}";
 
             string json = _requestHelper.GetData("get", url);
-            if (json == null || !isJson(json))
+            if (json == null || !Common.IsJson(json))
             {
                 txtMessage.AppendText("查询车票失败，网络异常！\r\n");
                 return;
@@ -152,10 +122,10 @@ namespace train12306
                 JObject obj = JObject.Parse(json);
 
 
-                if (bool.Parse( obj["status"].ToString()))
+                if (bool.Parse(obj["status"].ToString()))
                 {
                     List<string> listResult = JsonConvert.DeserializeObject<List<string>>(obj["data"]["result"].ToString());
-                    if (listResult!= null && listResult.Count > 0)
+                    if (listResult != null && listResult.Count > 0)
                     {
                         List<dynamic> searchResult = new List<dynamic>();
                         foreach (var item in listResult)
@@ -247,7 +217,7 @@ namespace train12306
 
                 }
                 else
-                    txtMessage.AppendText("查询车票失败，"+obj["message"].ToString()+"！\r\n");
+                    txtMessage.AppendText("查询车票失败，" + obj["message"].ToString() + "！\r\n");
 
             }
         }
@@ -307,23 +277,29 @@ namespace train12306
 
         private void getPassenger()
         {
-            string json = _requestHelper.GetData("post", getPassengerUlr);
-            if (bool.Parse( JObject.Parse(json)["status"].ToString()))
+            string json = _requestHelper.GetData("post", Api12306.getPassengerUlr);
+            if (json != null && Common.IsJson(json))
             {
-                List<dynamic> list = JsonConvert.DeserializeObject<List<dynamic>>(JObject.Parse(json)["data"]["normal_passengers"].ToString());
-                chkPassenger.DataSource = list;
-                chkPassenger.ValueMember = "passenger_id_no";
-                chkPassenger.DisplayMember = "passenger_name";
+                if (bool.Parse(JObject.Parse(json)["status"].ToString()))
+                {
+                    List<dynamic> list = JsonConvert.DeserializeObject<List<dynamic>>(JObject.Parse(json)["data"]["normal_passengers"].ToString());
+                    chkPassenger.DataSource = list;
+                    chkPassenger.ValueMember = "passenger_id_no";
+                    chkPassenger.DisplayMember = "passenger_name";
+                }
             }
-
+            else
+            {
+                MessageBox.Show("加载联系人失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
         // 买票
         private void BuyTicket()
         {
-            string json = _requestHelper.GetData("post", confUrl);
-            if (json != null && isJson(json))
+            string json = _requestHelper.GetData("post", Api12306.confUrl);
+            if (json != null && Common.IsJson(json))
             {
                 var obj = JObject.Parse(json);
 
@@ -340,9 +316,9 @@ namespace train12306
                     }
                 }
             }
-            Thread.Sleep(3000);
+            Thread.Sleep(timer_time * 1000);
             btnSearch_Click(null, new EventArgs());
-            Thread.Sleep(3000);
+            Thread.Sleep(timer_time * 1000);
 
 
             string purpose_codes = "ADULT";
@@ -365,7 +341,7 @@ namespace train12306
                         {
                             // 自动提交信息
 
-                            txtMessage.AppendText($"未查询到{ train["from_station_name"].ToString()}" +
+                            txtMessage.AppendText($"查询到{ train["from_station_name"].ToString()}" +
                 $"到{train["to_station_name"].ToString()}的{train["train_name"].ToString()}列车。正在为您提交。。。\r\n");
                             paramsData.Add("secretStr", train["secretStr"].ToString());
                             paramsData.Add("train_date", trainDate.Value.ToString("yyyy-MM-dd"));
@@ -395,10 +371,10 @@ namespace train12306
                             paramsData.Add("passengerTicketStr", passengerTicketStr);
                             paramsData.Add("oldPassengerStr", oldPassengerStr);
 
-                            json = _requestHelper.GetData("post", autoSubmitOrderRequestUrl, parseDicToParams(paramsData));
-                            Thread.Sleep(3000);
+                            json = _requestHelper.GetData("post", Api12306.autoSubmitOrderRequestUrl, parseDicToParams(paramsData));
+                            Thread.Sleep(timer_time * 1000);
 
-                            if (json != null && isJson(json))
+                            if (json != null && Common.IsJson(json))
                             {
                                 var obj = JObject.Parse(json);
 
@@ -437,9 +413,9 @@ namespace train12306
                                     paramsData.Add("_json_att", "");
 
 
-                                    json = _requestHelper.GetData("post", getQueueCountAsyncUrl, parseDicToParams(paramsData));
-                                    Thread.Sleep(3000);
-                                    if (json != null && isJson(json))
+                                    json = _requestHelper.GetData("post", Api12306.getQueueCountAsyncUrl, parseDicToParams(paramsData));
+                                    Thread.Sleep(timer_time * 1000);
+                                    if (json != null && Common.IsJson(json))
                                     {
                                         obj = JObject.Parse(json);
                                         if (obj["httpstatus"].ToString() == "200" && bool.Parse(obj["status"].ToString()))
@@ -459,8 +435,8 @@ namespace train12306
                                             paramsData.Add("seatDetailType", "");
                                             paramsData.Add("_json_att", "");
 
-                                            json = _requestHelper.GetData("post", confirmSingleForQueueAsysUrl, parseDicToParams(paramsData));
-                                            if (json != null && isJson(json))
+                                            json = _requestHelper.GetData("post", Api12306.confirmSingleForQueueAsysUrl, parseDicToParams(paramsData));
+                                            if (json != null && Common.IsJson(json))
                                             {
                                                 obj = JObject.Parse(json);
 
@@ -471,7 +447,8 @@ namespace train12306
                                                     {
                                                         txtMessage.AppendText("刷票成功，请在30分钟去12306官网支付订单。\r\n");
                                                         btnStop_Click(null, null);
-                                                        #region 发送邮件
+                                                        #region 发送邮件和播放背景音乐
+                                                        playMusic();
                                                         if (txtEmail.Text != "")
                                                         {
                                                             EmailHelper.SendMail(txtEmail.Text, "抢票成功！",
@@ -610,24 +587,10 @@ namespace train12306
 
         }
 
-        bool isJson(string json)
-        {
-            try
-            {
-                JObject.Parse(json);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Program.writeLog(ex);
-                return false;
-            }
-
-        }
 
         string getStandardTime()
         {
-            return (trainDate.Value.ToString("ddd MMM dd yyy ", DateTimeFormatInfo.InvariantInfo)+ 
+            return (trainDate.Value.ToString("ddd MMM dd yyy ", DateTimeFormatInfo.InvariantInfo) +
                 DateTime.Now.ToString("HH:mm:ss").Replace(":", "%3A") +
                 " GMT%2B0800 (%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)").Replace(' ', '+');
         }
@@ -641,12 +604,12 @@ namespace train12306
         {
             //加载乘客
             getPassenger();
-            Thread.Sleep(3000);
+            Thread.Sleep(timer_time * 1000);
         }
 
         private void dgvResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex==0&&e.RowIndex>-1)
+            if (e.ColumnIndex == 0 && e.RowIndex > -1)
             {
                 // 查看票价
                 string train_no = dgvResult.Rows[e.RowIndex].Cells["train_no"].Value.ToString();
@@ -654,11 +617,11 @@ namespace train12306
                 string to_station_no = dgvResult.Rows[e.RowIndex].Cells["to_station_no"].Value.ToString();
                 string date = trainDate.Value.ToString("yyyy-MM-dd");
                 string seat_types = dgvResult.Rows[e.RowIndex].Cells["seat_type"].Value.ToString();
-                FrmPrice price = new FrmPrice(train_no,from_station_no,to_station_no,date,seat_types);
+                FrmPrice price = new FrmPrice(train_no, from_station_no, to_station_no, date, seat_types);
                 price.Show();
-     
+
             }
-            else if (e.ColumnIndex == 2&&e.RowIndex>-1)
+            else if (e.ColumnIndex == 2 && e.RowIndex > -1)
             {
                 // 查看站点
                 string train_no = dgvResult.Rows[e.RowIndex].Cells["train_no"].Value.ToString();
@@ -667,6 +630,27 @@ namespace train12306
                 string date = trainDate.Value.ToString("yyyy-MM-dd");
                 FrmStation station = new FrmStation(train_no, from_station_no, to_station_no, date);
                 station.Show();
+            }
+        }
+
+        //播放背景音乐
+        public void playMusic()
+        {
+            string bgmPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgm", "message.wav");
+            if (File.Exists(bgmPath))
+            {
+                // 设置背景音乐循环播放五秒
+                int seconds = DateTime.Now.Second + 5;
+                SoundPlayer player = new SoundPlayer(bgmPath);
+                player.PlayLooping();
+
+                while (DateTime.Now.Second < seconds)
+                {
+
+                }
+
+                player.Stop();
+                player.Dispose();
             }
         }
     }

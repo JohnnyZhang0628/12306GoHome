@@ -10,13 +10,13 @@ namespace train12306
         public FrmStation(string train_no, string from_station_no, string to_station_no, string date)
         {
             InitializeComponent();
-            string url = "https://kyfw.12306.cn/otn/czxx/queryByTrainNo?train_no=" + train_no
+            string url = Api12306.queryByTrainNo+"?train_no=" + train_no
                 + "&from_station_telecode=" + from_station_no + "&to_station_telecode=" + to_station_no
                 + "&depart_date=" + date;
 
             RequestHelper helper = new RequestHelper();
             string json = helper.GetData("get", url);
-            if (json != null)
+            if (json != null&&Common.IsJson(json))
             {
                 var obj = JObject.Parse(json);
                 if (bool.Parse(obj["status"].ToString()))

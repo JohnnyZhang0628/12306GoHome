@@ -1,0 +1,28 @@
+﻿日期:2019-03-06 19:15:37
+错误信息：远程服务器返回错误: (404) 未找到。
+错误来源：System
+错误栈堆：   在 System.Net.HttpWebRequest.GetResponse()
+   在 train12306.RequestHelper.GetStream(String method, String url, String data) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\RequestHelper.cs:行号 92
+日期:2019-03-06 19:19:21
+错误信息：无效的 URI: 未能确定 URI 的格式。
+错误来源：System
+错误栈堆：   在 System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   在 System.Uri..ctor(String uriString)
+   在 System.Net.WebRequest.Create(String requestUriString)
+   在 train12306.RequestHelper.GetStream(String method, String url, String data) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\RequestHelper.cs:行号 61
+日期:2019-03-06 19:28:46
+错误信息：无效的 URI: 未能确定 URI 的格式。
+错误来源：System
+错误栈堆：   在 System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   在 System.Uri..ctor(String uriString)
+   在 System.Net.WebRequest.Create(String requestUriString)
+   在 train12306.RequestHelper.GetStream(String method, String url, String data) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\RequestHelper.cs:行号 61
+日期:2019-03-06 19:31:19
+错误信息：Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.Common.IsJson(String json) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Common.cs:行号 30

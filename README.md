@@ -4,7 +4,12 @@
 2019自动抢票CS版,帮助大家的麻烦点一个star.
 
 ## 2019-03-05 版本：1.0.0.8 新增双击车次查看价格、新增双击出发站查看停靠站、修改出发站、终点站搜索BUG问题。
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/station.png)
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/price.png)
+## 2019-03-06 版本：1.0.0.9 新增动态获取api，和买票成功后播放音乐。
 
+## 买票步骤【严格按照流程走，12306会分析你买票步骤，如果顺序错了，有可能提示非法请求】
+![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/step.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/login.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/main.png)
 ![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/success.png)

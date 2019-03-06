@@ -105,7 +105,7 @@ namespace train12306
             }
             catch (Exception ex)
             {
-                Program.writeLog(ex);
+                Common.WriteLog(ex);
                 return null;
             }
         }

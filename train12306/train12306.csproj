@@ -27,7 +27,7 @@
     <TargetCulture>zh-Hans</TargetCulture>
     <ProductName>归途</ProductName>
     <PublisherName>怎一个强字了得</PublisherName>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -88,6 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api12306.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="EmailHelper.cs" />
     <Compile Include="FrmAbout.cs">
       <SubType>Form</SubType>
@@ -181,6 +183,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bgm\message.wav" />
     <Content Include="data\station_name.js" />
     <Content Include="image\aliPay.jpg" />
     <Content Include="image\GoHome.jpg" />
