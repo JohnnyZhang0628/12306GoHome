@@ -17,8 +17,8 @@ namespace train12306
     {
 
 
-        //timer
-        int timer_time = 3;
+        //线程休眠时间（单位：秒）
+        int timer_time = 0;
 
 
         // 参数字典
@@ -286,6 +286,9 @@ namespace train12306
                     chkPassenger.DataSource = list;
                     chkPassenger.ValueMember = "passenger_id_no";
                     chkPassenger.DisplayMember = "passenger_name";
+
+                    // 防止出票失败！
+                    btnSearch_Click(null, new EventArgs());
                 }
             }
             else
@@ -386,16 +389,17 @@ namespace train12306
 
                                     #region 保存到队列中
                                     paramsData.Clear();
-                                    if (obj["data"]["ifShowPassCode"].ToString() == "Y")
-                                    {
-                                        int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
-                                        int intervalTime = ifShowPassCodeTime / timer_time;
-                                        while (timer_time != 0)
-                                        {
-                                            timer_time--;
-                                            Thread.Sleep(intervalTime);
-                                        }
-                                    }
+
+                                    //if (obj["data"]["ifShowPassCode"].ToString() == "Y")
+                                    //{
+                                    //    int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
+                                    //    int intervalTime = ifShowPassCodeTime / timer_time;
+                                    //    while (timer_time != 0)
+                                    //    {
+                                    //        timer_time--;
+                                    //        Thread.Sleep(intervalTime);
+                                    //    }
+                                    //}
 
 
 
