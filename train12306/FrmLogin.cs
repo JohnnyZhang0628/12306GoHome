@@ -121,11 +121,11 @@ namespace train12306
                 return;
             }
 
-            if (answer == "")
-            {
-                MessageBox.Show("验证码不能为空！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (answer == "")
+            //{
+            //    MessageBox.Show("验证码不能为空！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             if (!CheckValidateCode())
             {
@@ -148,9 +148,7 @@ namespace train12306
                             FrmMain main = new FrmMain();
                             main.Show();
                         }
-
                     }
-
                 }
                 lblError.Text = JObject.Parse(json)["result_message"].ToString();
                 GetValidateCode();
@@ -164,6 +162,14 @@ namespace train12306
 
         void GetValidateCode()
         {
+            //清空选中图片
+            foreach (Control c in picValidate.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    c.Controls.Clear();
+                }
+            }
             answer = "";
             string json = _requestHelper.GetData("get", Api12306.getCaptcha());
             if (json != null && Common.IsJson(json))
@@ -189,6 +195,14 @@ namespace train12306
 
         bool CheckValidateCode()
         {
+            //获取选中图片坐标
+            foreach (Control c in picValidate.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    answer += (c.Location.X + 25).ToString() + "," + (c.Location.Y + 25).ToString() + ",";
+                }
+            }
             string json = _requestHelper.GetData("get", Api12306.getCaptchaCheck() + "&answer=" + answer);
             if (json != null && Common.IsJson(json))
             {
@@ -235,6 +249,51 @@ namespace train12306
             }
         }
 
-
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            int x = 5;
+            int y = 40;
+            for (int i = 1; i < 9; i++)
+            {
+                PictureBox pc = new PictureBox();
+                pc.Name = "p" + i.ToString();
+                pc.Size = new Size(68, 68);
+                pc.Parent = this.picValidate;
+                pc.Tag = "false";
+                pc.Click += new System.EventHandler(pictureBox_Click);
+                pc.BackColor = Color.Transparent;// Color.Wheat; //
+                pc.Location = new Point(x, y);
+                x = x + 72;
+                if (i == 4)
+                {
+                    x = 5;
+                    y = 113;
+                }
+            }
+        }
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            PictureBox pc = sender as PictureBox;
+            if (pc.Controls.Count > 0)
+            {
+                pc.Controls.Clear();
+            }
+            else
+            {
+                PictureBox cp = new PictureBox();
+                cp.Size = new Size(25, 25);
+                cp.BackColor = Color.Transparent;
+                cp.Image = Properties.Resources.chlogo;
+                cp.Parent = pc;
+                cp.Location = new Point(25, 25);
+                cp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+                cp.Click += new System.EventHandler(cp_Click);
+            }
+        }
+        private void cp_Click(object sender, EventArgs e)
+        {
+            PictureBox cp = sender as PictureBox;
+            cp.Parent.Controls.Clear();
+        }
     }
 }
