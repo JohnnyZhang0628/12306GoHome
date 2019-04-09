@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
-
+using System.Reflection;
 
 namespace train12306
 {
@@ -45,6 +45,22 @@ namespace train12306
         {
             DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1, 0, 0, 0, 0));
             return ((date.Ticks - startTime.Ticks) / 10000).ToString();
+        }
+
+        /// <summary>
+        /// 执行js
+        /// </summary>
+        /// <param name="js">例子 function time(a, b, msg){ var sum = a + b; return new Date().getTime() + ': ' + msg + ' = ' + sum }</param>
+        /// <param name="method">例子 time(a, b, 'a + b')</param>
+        /// <returns></returns>
+        public static string ExecJS(string js, string method)
+        {
+            Type obj = Type.GetTypeFromProgID("ScriptControl");
+            if (obj == null) return null;
+            object ScriptControl = Activator.CreateInstance(obj);
+            obj.InvokeMember("Language", BindingFlags.SetProperty, null, ScriptControl, new object[] { "JavaScript" });
+            obj.InvokeMember("AddCode", BindingFlags.InvokeMethod, null, ScriptControl, new object[] { js });
+            return obj.InvokeMember("Eval", BindingFlags.InvokeMethod, null, ScriptControl, new object[] { method }).ToString();
         }
 
 

@@ -60,7 +60,7 @@ namespace train12306
 
                 webRequest = (HttpWebRequest)WebRequest.Create(url);
                 webRequest.Accept = "*/*";
-                webRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.62 Safari/537.36";
+                webRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36";
                 webRequest.Referer = "https://kyfw.12306.cn/otn/leftTicket/init";
                 webRequest.Headers["Origin"]= "https://kyfw.12306.cn";
                 webRequest.Headers["X-Requested-With"] = "XMLHttpRequest";

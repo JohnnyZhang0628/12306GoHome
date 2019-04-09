@@ -78,5 +78,14 @@ namespace train12306
         //查询停靠站
         public static string queryByTrainNo="https://kyfw.12306.cn/otn/czxx/queryByTrainNo";
 
+        //加载设备JS
+        public static string logDeviceUrl = "https://kyfw.12306.cn/otn/HttpZF/logdevice?algID=knqqubQnpP&hashCode=aN0uwGDjxJX998iyuBcBqE2W-_3Qh1HSBYxRZwLw0go&FMQw=0&q4f3=zh-CN&VPIf=1" +
+            "&custID=133&VEek=unknown&dzuS=0&yD16=0&EOQP=49a9fbfe2beb0490836324ceb234fef4&lEnu=3232240615&jp76=52d67b2a5aa5e031084733d5006cc664&hAqN=Win32&platform=WEB" +
+            "&ks0Q=d22ca0b81584fbea62237b14bd04c866&TeRS=1040x1920&tOHY=24xx1080x1920&Fvje=i1l1o1s1&q5aJ=-8&wNLf=99115dfb07133750ba677d055874de87" +
+            "&0aew=Mozilla/5.0%20(Windows%20NT%206.1;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/71.0.3578.98%20Safari/537.36&E3gR=1049bff4842ef8737bcc956bed24dadb" +
+            "&timestamp=";
+
+
+
     }
 }

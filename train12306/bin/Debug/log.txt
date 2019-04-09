@@ -26,3 +26,35 @@
    在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
    在 Newtonsoft.Json.Linq.JObject.Parse(String json)
    在 train12306.Common.IsJson(String json) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Common.cs:行号 30
+日期:2019-04-09 10:48:53
+错误信息：调用的目标发生了异常。
+错误来源：mscorlib
+错误栈堆：   在 System.RuntimeType.InvokeDispMethod(String name, BindingFlags invokeAttr, Object target, Object[] args, Boolean[] byrefModifiers, Int32 culture, String[] namedParameters)
+   在 System.RuntimeType.InvokeMember(String name, BindingFlags bindingFlags, Binder binder, Object target, Object[] providedArgs, ParameterModifier[] modifiers, CultureInfo culture, String[] namedParams)
+   在 System.Type.InvokeMember(String name, BindingFlags invokeAttr, Binder binder, Object target, Object[] args)
+   在 train12306.Common.ExecJS(String js, String method) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Common.cs:行号 62
+   在 train12306.FrmLogin..ctor() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmLogin.cs:行号 35
+   在 train12306.Program.Main() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Program.cs:行号 19
+日期:2019-04-09 10:50:12
+错误信息：调用的目标发生了异常。
+错误来源：mscorlib
+错误栈堆：   在 System.RuntimeType.InvokeDispMethod(String name, BindingFlags invokeAttr, Object target, Object[] args, Boolean[] byrefModifiers, Int32 culture, String[] namedParameters)
+   在 System.RuntimeType.InvokeMember(String name, BindingFlags bindingFlags, Binder binder, Object target, Object[] providedArgs, ParameterModifier[] modifiers, CultureInfo culture, String[] namedParams)
+   在 System.Type.InvokeMember(String name, BindingFlags invokeAttr, Binder binder, Object target, Object[] args)
+   在 train12306.Common.ExecJS(String js, String method) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Common.cs:行号 62
+   在 train12306.FrmLogin..ctor() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\FrmLogin.cs:行号 35
+   在 train12306.Program.Main() 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Program.cs:行号 19
+日期:2019-04-09 11:03:00
+错误信息：Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 242.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.Common.IsJson(String json) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Common.cs:行号 30
+日期:2019-04-09 11:07:50
+错误信息：Additional text encountered after finished reading JSON content: '. Path '', line 1, position 240.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.Common.IsJson(String json) 位置 D:\WorkSpace\train12306\12306GoHome\train12306\Common.cs:行号 30

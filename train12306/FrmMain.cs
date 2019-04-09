@@ -19,6 +19,8 @@ namespace train12306
 
         //线程休眠时间（单位：秒）
         int timer_time = 0;
+        // 默认排队等待时间
+        int wait_time = 3;
 
 
         // 参数字典
@@ -390,16 +392,16 @@ namespace train12306
                                     #region 保存到队列中
                                     paramsData.Clear();
 
-                                    //if (obj["data"]["ifShowPassCode"].ToString() == "Y")
-                                    //{
-                                    //    int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
-                                    //    int intervalTime = ifShowPassCodeTime / timer_time;
-                                    //    while (timer_time != 0)
-                                    //    {
-                                    //        timer_time--;
-                                    //        Thread.Sleep(intervalTime);
-                                    //    }
-                                    //}
+                                    if (obj["data"]["ifShowPassCode"].ToString() == "Y")
+                                    {
+                                        int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
+                                        int intervalTime = ifShowPassCodeTime / wait_time;
+                                        while (wait_time != 0)
+                                        {
+                                            wait_time--;
+                                            Thread.Sleep(intervalTime);
+                                        }
+                                    }
 
 
 

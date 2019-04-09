@@ -12,7 +12,7 @@ namespace train12306
 {
     public partial class FrmLogin : Form
     {
-    
+
 
         RequestHelper _requestHelper = new RequestHelper();
 
@@ -28,6 +28,31 @@ namespace train12306
             this.Hide();
             FrmAdver adver = new FrmAdver();
             adver.Show();
+
+            //加载设备id
+            string json = _requestHelper.GetData("get", Api12306.logDeviceUrl + Common.GetTimeSpan(DateTime.Now));
+            if (json != null)
+            {
+                json = json.Replace("callbackFunction('", "").Replace("')", "");
+                if (Common.IsJson(json))
+                {
+                    // 添加设备cookie
+                    var obj = JObject.Parse(json);
+                    _requestHelper.AddCookie("RAIL_EXPIRATION", obj["exp"].ToString());
+                    _requestHelper.AddCookie("RAIL_DEVICEID", obj["dfp"].ToString());
+                }
+                else
+                {
+                    MessageBox.Show("获取设备信息失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("获取设备信息失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
 
             //动态加载查票url
@@ -60,7 +85,7 @@ namespace train12306
                     }
                     if (line.IndexOf("passport_captcha_check ") > -1)
                     {
-                        Api12306.passport_captcha_check =  line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
+                        Api12306.passport_captcha_check = line.Split('=')[1].Replace(" ", "").Replace(";", "").Replace("'", "");
                     }
                     if (line.IndexOf("passport_authclient ") > -1)
                     {
@@ -133,6 +158,7 @@ namespace train12306
             else
             {
                 MessageBox.Show("登录失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GetValidateCode();
             }
         }
 
@@ -140,7 +166,7 @@ namespace train12306
         {
             answer = "";
             string json = _requestHelper.GetData("get", Api12306.getCaptcha());
-            if (json != null&&Common.IsJson(json))
+            if (json != null && Common.IsJson(json))
             {
                 var obj = JObject.Parse(json);
                 if (obj["result_code"].ToString() == "0")
@@ -163,7 +189,7 @@ namespace train12306
 
         bool CheckValidateCode()
         {
-            string json = _requestHelper.GetData("get", Api12306.getCaptchaCheck()+"&answer="+answer);
+            string json = _requestHelper.GetData("get", Api12306.getCaptchaCheck() + "&answer=" + answer);
             if (json != null && Common.IsJson(json))
             {
                 if (JObject.Parse(json)["result_code"].ToString() == "4")
