@@ -106,7 +106,7 @@
             this.picValidate.Size = new System.Drawing.Size(293, 190);
             this.picValidate.TabIndex = 6;
             this.picValidate.TabStop = false;
-            this.picValidate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picValidate_MouseUp);
+            //this.picValidate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picValidate_MouseUp);
             // 
             // lblError
             // 

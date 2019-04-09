@@ -235,19 +235,19 @@ namespace train12306
             GetValidateCode();
         }
 
-        private void picValidate_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (answer == "")
-                    answer += e.X.ToString() + "," + (e.Y - 40).ToString();
-                else
-                    answer += "," + e.X.ToString() + "," + (e.Y - 40).ToString();
+        //private void picValidate_MouseUp(object sender, MouseEventArgs e)
+        //{
+        //    if (e.Button == MouseButtons.Left)
+        //    {
+        //        if (answer == "")
+        //            answer += e.X.ToString() + "," + (e.Y - 40).ToString();
+        //        else
+        //            answer += "," + e.X.ToString() + "," + (e.Y - 40).ToString();
 
-                Graphics g = picValidate.CreateGraphics();
-                g.FillEllipse(bush, e.X - 10, e.Y - 10, 20, 20);
-            }
-        }
+        //        Graphics g = picValidate.CreateGraphics();
+        //        g.FillEllipse(bush, e.X - 10, e.Y - 10, 20, 20);
+        //    }
+        //}
 
         private void FrmLogin_Load(object sender, EventArgs e)
         {
