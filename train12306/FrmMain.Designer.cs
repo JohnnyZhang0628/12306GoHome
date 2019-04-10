@@ -300,7 +300,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(1028, 31);
+            this.txtEmail.Location = new System.Drawing.Point(1028, 29);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(157, 23);
             this.txtEmail.TabIndex = 20;
@@ -308,7 +308,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(989, 31);
+            this.label10.Location = new System.Drawing.Point(989, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 17);
             this.label10.TabIndex = 19;
@@ -317,7 +317,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(746, 28);
+            this.label9.Location = new System.Drawing.Point(746, 32);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 17);
             this.label9.TabIndex = 18;
@@ -325,16 +325,16 @@
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(784, 23);
+            this.txtMessage.Location = new System.Drawing.Point(784, 29);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessage.Size = new System.Drawing.Size(190, 113);
+            this.txtMessage.Size = new System.Drawing.Size(190, 112);
             this.txtMessage.TabIndex = 17;
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(593, 103);
+            this.btnStop.Location = new System.Drawing.Point(593, 107);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(87, 33);
@@ -346,7 +346,7 @@
             // cmbTime
             // 
             this.cmbTime.FormattingEnabled = true;
-            this.cmbTime.Location = new System.Drawing.Point(593, 28);
+            this.cmbTime.Location = new System.Drawing.Point(593, 29);
             this.cmbTime.Name = "cmbTime";
             this.cmbTime.Size = new System.Drawing.Size(121, 25);
             this.cmbTime.TabIndex = 15;
@@ -354,7 +354,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(531, 28);
+            this.label5.Location = new System.Drawing.Point(531, 32);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 17);
             this.label5.TabIndex = 14;
@@ -363,7 +363,7 @@
             // chkSeat
             // 
             this.chkSeat.FormattingEnabled = true;
-            this.chkSeat.Location = new System.Drawing.Point(401, 24);
+            this.chkSeat.Location = new System.Drawing.Point(401, 29);
             this.chkSeat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chkSeat.Name = "chkSeat";
             this.chkSeat.Size = new System.Drawing.Size(119, 112);
@@ -372,7 +372,7 @@
             // chkTrainNo
             // 
             this.chkTrainNo.FormattingEnabled = true;
-            this.chkTrainNo.Location = new System.Drawing.Point(231, 24);
+            this.chkTrainNo.Location = new System.Drawing.Point(231, 29);
             this.chkTrainNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chkTrainNo.Name = "chkTrainNo";
             this.chkTrainNo.Size = new System.Drawing.Size(119, 112);
@@ -381,7 +381,7 @@
             // chkPassenger
             // 
             this.chkPassenger.FormattingEnabled = true;
-            this.chkPassenger.Location = new System.Drawing.Point(63, 30);
+            this.chkPassenger.Location = new System.Drawing.Point(63, 29);
             this.chkPassenger.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chkPassenger.Name = "chkPassenger";
             this.chkPassenger.Size = new System.Drawing.Size(119, 112);
@@ -389,7 +389,7 @@
             // 
             // btnAutoSubmit
             // 
-            this.btnAutoSubmit.Location = new System.Drawing.Point(593, 60);
+            this.btnAutoSubmit.Location = new System.Drawing.Point(593, 64);
             this.btnAutoSubmit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAutoSubmit.Name = "btnAutoSubmit";
             this.btnAutoSubmit.Size = new System.Drawing.Size(87, 33);
@@ -401,7 +401,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(360, 31);
+            this.label6.Location = new System.Drawing.Point(360, 32);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 17);
             this.label6.TabIndex = 6;
@@ -410,7 +410,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(191, 29);
+            this.label7.Location = new System.Drawing.Point(191, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 17);
             this.label7.TabIndex = 2;
@@ -419,7 +419,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 34);
+            this.label8.Location = new System.Drawing.Point(9, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 51);
             this.label8.TabIndex = 0;

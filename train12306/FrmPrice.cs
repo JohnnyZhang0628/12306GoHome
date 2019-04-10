@@ -21,7 +21,6 @@ namespace train12306
                 if (bool.Parse(obj["status"].ToString()))
                 {
                     obj  = JObject.Parse(obj["data"].ToString());
-
                     List<dynamic> listResult = new List<dynamic>();
                     if (obj["A9"] != null)
                         listResult.Add(new { seat_name = "特等座", seat_price=obj["A9"] });
@@ -52,9 +51,7 @@ namespace train12306
 
                     if (obj["WZ"] != null)
                         listResult.Add(new { seat_name = "无座", seat_price = obj["WZ"] });
-
                     dgvPrice.DataSource = listResult;
-
                     dgvPrice.Columns["seat_name"].HeaderText = "座位类型";
                     dgvPrice.Columns["seat_price"].HeaderText = "价格";
 
