@@ -76,3 +76,35 @@
    在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
    在 Newtonsoft.Json.Linq.JObject.Parse(String json)
    在 train12306.Common.IsJson(String json) 位置 F:\GIT\train12306\Common.cs:行号 30
+日期:2019-04-20 13:47:08
+错误信息：Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.Common.IsJson(String json) 位置 F:\GIT\train12306\Common.cs:行号 30
+日期:2019-04-20 13:47:14
+错误信息：Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.Common.IsJson(String json) 位置 F:\GIT\train12306\Common.cs:行号 30
+日期:2019-04-20 15:05:19
+错误信息：Unexpected character encountered while parsing value: <. Path '', line 0, position 0.
+错误来源：Newtonsoft.Json
+错误栈堆：   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json)
+   在 train12306.Common.IsJson(String json) 位置 F:\GIT\train12306\Common.cs:行号 30
+日期:2019-04-20 15:07:06
+错误信息：必须先将 ContentLength 字节写入请求流，然后再调用 [Begin]GetResponse。
+错误来源：System
+错误栈堆：   在 System.Net.HttpWebRequest.GetResponse()
+   在 train12306.RequestHelper.GetStream(String method, String url, String data) 位置 F:\GIT\train12306\RequestHelper.cs:行号 92

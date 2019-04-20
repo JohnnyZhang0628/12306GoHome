@@ -63,9 +63,39 @@ namespace train12306.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap banner19 {
+            get {
+                object obj = ResourceManager.GetObject("banner19", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap chlogo {
             get {
                 object obj = ResourceManager.GetObject("chlogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pwdBtn {
+            get {
+                object obj = ResourceManager.GetObject("pwdBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap qrCodeBtn {
+            get {
+                object obj = ResourceManager.GetObject("qrCodeBtn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

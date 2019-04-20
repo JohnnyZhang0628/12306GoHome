@@ -295,5 +295,140 @@ namespace train12306
             PictureBox cp = sender as PictureBox;
             cp.Parent.Controls.Clear();
         }
+
+        Thread thstart;
+        Thread thsaoma;
+        bool isQRloginSatrt = false;
+        static object objlock = new object();
+        static DateTime StartTime;
+        static string uuid;
+       
+        //线程工作
+        private void threadWork()
+        {
+            while (isQRloginSatrt)
+            {
+                if ((DateTime.Now - StartTime).TotalSeconds > 59)
+                {
+                    StartTime = DateTime.Now;
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        Get_Qrcode();
+                    }));
+                }
+            }
+        }
+        //获取二维码图片数据
+        private void Get_Qrcode()
+        {
+            try
+            {
+                uuid = "";
+                QRCodeImage.Image = null;
+                string json = _requestHelper.GetData("post", Api12306.url_create_qr64, "appid=otn");
+                if (Common.IsJson(json))
+                {
+                    JObject obj = JObject.Parse(json);
+                    if (obj["result_code"].ToString() == "0")
+                    {
+                        uuid = obj["uuid"].ToString();
+                        QRCodeImage.Image = Image.FromStream(Common.GetImageFromBase64(obj["image"].ToString()));
+                    }
+                }
+                else
+                {
+                    Get_Qrcode();
+                }
+            }
+            catch (Exception ex)
+            {
+                Get_Qrcode();
+            }
+        }
+
+        void setlabelState(string str)
+        {
+            this.Invoke(new MethodInvoker(delegate { labelState.Text = str; }));
+        }
+        //监测扫码
+        private void saoma()
+        {
+            while (isQRloginSatrt)
+            {
+                if (!string.IsNullOrEmpty(uuid))
+                {
+                    string json = _requestHelper.GetData("post", Api12306.url_checkqr, "uuid=" + uuid + "&appid=otn");
+                    if (string.IsNullOrEmpty(json))
+                        return;
+                    JObject obj = JObject.Parse(json);
+                    if (Common.IsJson(json))
+                    {
+                        if (obj["result_code"].ToString() == "1")
+                            setlabelState("   手机端已扫码");
+                        if (obj["result_code"].ToString() == "3")
+                        {
+                            //二维码过期
+                            setlabelState("   验证码已过期");
+                            Thread.Sleep(500);
+                            Get_Qrcode();
+                        }
+                        if (obj["result_code"].ToString() == "2")
+                        {
+                            setlabelState("   登陆成功");
+                            json = _requestHelper.GetData("post", Api12306.url_uamtk, "appid=otn&uamtk=" + obj["uamtk"].ToString());
+                            if (Common.IsJson(json))
+                            {
+                                obj = JObject.Parse(json);
+                                json = _requestHelper.GetData("post", Api12306.url_uamauthclient, "tk=" + obj["newapptk"].ToString());
+                                if (Common.IsJson(json))
+                                {
+                                    if (obj["result_code"].ToString() == "0")
+                                    {
+                                        isQRloginSatrt = false;
+                                        json = _requestHelper.GetData("get", Api12306.initMy12306Api);
+                                        //获取当前登陆人信息
+                                        //if (json != null && Common.IsJson(json))
+                                            //userinfo = JObject.Parse(json)["data"]["user_name"].ToString() + JObject.Parse(json)["data"]["user_regard"].ToString();
+                                        this.Invoke(new MethodInvoker(delegate ()
+                                        {
+                                             this.Hide();
+                                             new FrmMain().Show();
+                                        }));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        //tabcontrol切换事件
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage ==tabPage1)
+            {
+                isQRloginSatrt = false;
+            }
+            if (e.TabPage == tabPage2)
+            {
+                isQRloginSatrt = true;
+                try
+                {
+                    //启动线程，加载二维码
+                    thstart = new Thread(new ThreadStart(threadWork));
+                    thstart.IsBackground = true;
+                    thstart.Start();
+                    //////启动线程，监测扫码
+                    thsaoma = new Thread(new ThreadStart(saoma));
+                    thsaoma.IsBackground = true;
+                    thsaoma.Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
     }
 }

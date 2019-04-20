@@ -190,6 +190,9 @@
     <Content Include="image\icon.ico" />
     <Content Include="image\wxPay.jpg" />
     <Content Include="image\切换.png" />
+    <None Include="Resources\banner19.png" />
+    <None Include="Resources\qrCodeBtn.png" />
+    <None Include="Resources\pwdBtn.png" />
     <None Include="Resources\chlogo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

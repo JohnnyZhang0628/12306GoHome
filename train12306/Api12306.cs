@@ -14,6 +14,14 @@ namespace train12306
         //域名
         public readonly static string domain = "https://kyfw.12306.cn";
 
+        //二维码获取、校验
+        public readonly static string url_create_qr64 = "https://kyfw.12306.cn/passport/web/create-qr64";
+        public readonly static string url_checkqr = "https://kyfw.12306.cn/passport/web/checkqr";
+        public readonly static string url_uamtk = "https://kyfw.12306.cn/passport/web/auth/uamtk";
+        public readonly static string url_uamauthclient = "https://kyfw.12306.cn/otn/uamauthclient";
+        //获取当前登陆人员信息
+        public readonly static string initMy12306Api = "https://kyfw.12306.cn/otn/index/initMy12306Api";
+
         // appid
         public static string ctx = "";
 

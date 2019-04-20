@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="train12306.exe" size="518080">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="train12306.exe" size="1073088">
       <assemblyIdentity name="train12306" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ERzUPeJx2iIMFS17ygoMJf1VYgNOUbVX9EGr90Scw7U=</dsig:DigestValue>
+        <dsig:DigestValue>T/v34PNsf36Y5qpFjxCac+XvUqtxsuAoKs6Pos6f74A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

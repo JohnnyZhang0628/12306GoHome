@@ -62,7 +62,12 @@ namespace train12306
             obj.InvokeMember("AddCode", BindingFlags.InvokeMethod, null, ScriptControl, new object[] { js });
             return obj.InvokeMember("Eval", BindingFlags.InvokeMethod, null, ScriptControl, new object[] { method }).ToString();
         }
-
+        public static Stream GetImageFromBase64(string base64string)
+        {
+            byte[] b = Convert.FromBase64String(base64string);
+            MemoryStream ms = new MemoryStream(b);
+            return ms;
+        }
 
     }
 }
