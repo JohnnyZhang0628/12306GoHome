@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="train12306.exe.manifest" size="7363">
+    <dependentAssembly dependencyType="install" codebase="train12306.exe.manifest" size="7352">
       <assemblyIdentity name="train12306.exe" version="1.0.0.11" publicKeyToken="0000000000000000" language="zh-Hans" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YZM4hzivekgFQ+0CEtxXlVoL39gvoT6GjH6bmfNHzKM=</dsig:DigestValue>
+        <dsig:DigestValue>FEj7agWhtreiEp59jDlno9o6KducKKnhBykojTNc9Ks=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
