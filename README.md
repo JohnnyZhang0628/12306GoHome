@@ -1,6 +1,8 @@
 ﻿
 ﻿# 12306GoHome
-### 2019自动抢票CS版,帮助大家的麻烦点一个star。点击Clone or download 下载，点击Clone or download 下载，点击Clone or download 下载。重要的事情说三遍
+### 2019自动抢票CS版,帮助大家的麻烦点一个star。
+
+## [下载最新版](https://github.com/JohnnyZhang0628/12306GoHome/releases)
 
 ## 【版本更新】
 ### 2019-05-12 版本：1.0.0.11 发布手机扫码登陆。由于账号、密码登陆设备号一直会变，所以希望大家多用扫码登陆。
