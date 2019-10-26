@@ -11,10 +11,12 @@ namespace train12306
         {
             using (StreamWriter sw = new StreamWriter("log.txt", true, System.Text.Encoding.UTF8))
             {
+                sw.WriteLine("********************************************");
                 sw.WriteLine($"日期:{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
                 sw.WriteLine($"错误信息：{ex.Message}");
                 sw.WriteLine($"错误来源：{ex.Source}");
                 sw.WriteLine($"错误栈堆：{ex.StackTrace}");
+                sw.WriteLine("********************************************");
             }
         }
 

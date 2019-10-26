@@ -30,28 +30,28 @@ namespace train12306
             adver.Show();
 
             //加载设备id
-            string json = _requestHelper.GetData("get", Api12306.logDeviceUrl + Common.GetTimeSpan(DateTime.Now));
-            if (json != null)
-            {
-                json = json.Replace("callbackFunction('", "").Replace("')", "");
-                if (Common.IsJson(json))
-                {
-                    // 添加设备cookie
-                    var obj = JObject.Parse(json);
-                    _requestHelper.AddCookie("RAIL_EXPIRATION", obj["exp"].ToString());
-                    _requestHelper.AddCookie("RAIL_DEVICEID", obj["dfp"].ToString());
-                }
-                else
-                {
-                    MessageBox.Show("获取设备信息失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("获取设备信息失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //string json = _requestHelper.GetData("get", Api12306.logDeviceUrl + Common.GetTimeSpan(DateTime.Now));
+            //if (json != null)
+            //{
+            //    json = json.Replace("callbackFunction('", "").Replace("')", "");
+            //    if (Common.IsJson(json))
+            //    {
+            //        // 添加设备cookie
+            //        var obj = JObject.Parse(json);
+            //        _requestHelper.AddCookie("RAIL_EXPIRATION", obj["exp"].ToString());
+            //        _requestHelper.AddCookie("RAIL_DEVICEID", obj["dfp"].ToString());
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("获取设备信息失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return;
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("获取设备信息失败！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
 
 
@@ -99,6 +99,8 @@ namespace train12306
             adver.Close();
             this.Show();
 
+            //默认扫码登陆
+            tabControl1.SelectTab(1);
 
             GetValidateCode();
 
@@ -235,19 +237,6 @@ namespace train12306
             GetValidateCode();
         }
 
-        //private void picValidate_MouseUp(object sender, MouseEventArgs e)
-        //{
-        //    if (e.Button == MouseButtons.Left)
-        //    {
-        //        if (answer == "")
-        //            answer += e.X.ToString() + "," + (e.Y - 40).ToString();
-        //        else
-        //            answer += "," + e.X.ToString() + "," + (e.Y - 40).ToString();
-
-        //        Graphics g = picValidate.CreateGraphics();
-        //        g.FillEllipse(bush, e.X - 10, e.Y - 10, 20, 20);
-        //    }
-        //}
 
         private void FrmLogin_Load(object sender, EventArgs e)
         {
@@ -342,6 +331,7 @@ namespace train12306
             }
             catch (Exception ex)
             {
+                Common.WriteLog(ex);
                 Get_Qrcode();
             }
         }
@@ -386,9 +376,6 @@ namespace train12306
                                     {
                                         isQRloginSatrt = false;
                                         json = _requestHelper.GetData("get", Api12306.initMy12306Api);
-                                        //获取当前登陆人信息
-                                        //if (json != null && Common.IsJson(json))
-                                            //userinfo = JObject.Parse(json)["data"]["user_name"].ToString() + JObject.Parse(json)["data"]["user_regard"].ToString();
                                         this.Invoke(new MethodInvoker(delegate ()
                                         {
                                              this.Hide();

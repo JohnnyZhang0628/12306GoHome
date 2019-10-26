@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="train12306.exe" version="1.0.0.11" publicKeyToken="0000000000000000" language="zh-Hans" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="train12306.exe" version="1.0.0.12" publicKeyToken="0000000000000000" language="zh-Hans" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -16,15 +16,15 @@
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
         <!--
           UAC 清单选项
-         若想要更改 Windows 用户帐户控制级别，请
-         将 requestedExecutionLevel 节点替换为下述某项。
+          如果要更改 Windows 用户帐户控制级别，请用以下节点之一替换
+          requestedExecutionLevel 节点。
 
-       <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
-       <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
-       <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-        若想要使用文件和注册表虚拟化以实现向后
-        兼容，请删除 requestedExecutionLevel 节点。
+          如果要利用文件和注册表虚拟化提供
+          向后兼容性，请删除 requestedExecutionLevel 节点。
     -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uUHSh5J0tiZWo8Z9FWBGL+ktnH/GQSJsOr3Cj3uFz+M=</dsig:DigestValue>
+        <dsig:DigestValue>zcLN7tGOSPKUoE9ki8k8ZCK321LdFRzNk0YNvst2Y0w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

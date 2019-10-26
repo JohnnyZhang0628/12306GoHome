@@ -111,6 +111,13 @@ namespace train12306
             if (radStudent.Checked)
                 purpose_codes = "0X00";
 
+            // 添加cookies，不添加查询车票查不到
+            //string _jc_save_fromStation = HttpUtility.UrlEncode( cmbFromStation.Text + "," + from_station);
+            //string _jc_save_toStation = HttpUtility.UrlEncode(cmbToStation.Text + "," + to_station);
+            //_requestHelper.AddCookie("_jc_save_fromStation", _jc_save_fromStation);
+            //_requestHelper.AddCookie("_jc_save_toStation", _jc_save_toStation);
+
+
             string url = Api12306.getQuery() + $"?leftTicketDTO.train_date={ train_date }&leftTicketDTO.from_station={from_station }&leftTicketDTO.to_station={to_station }&purpose_codes={ purpose_codes}";
 
             string json = _requestHelper.GetData("get", url);
@@ -308,7 +315,7 @@ namespace train12306
             {
                 var obj = JObject.Parse(json);
 
-                if (obj["httpstatus"].ToString() == "200" && bool.Parse(obj["status"].ToString()))
+                if (bool.Parse(obj["status"].ToString()))
                 {
                     if (obj["data"]["is_login"].ToString() == "N")
                     {
@@ -358,6 +365,8 @@ namespace train12306
                             paramsData.Add("bed_level_order_num", "000000000000000000000000000000");
 
                             string passengerTicketStr = "";
+                            // 加密后字符串
+                            string passengerTicketEncodeStr = "";
                             string oldPassengerStr = "";
 
                             foreach (var p in chkPassenger.CheckedItems)
@@ -365,7 +374,12 @@ namespace train12306
                                 var passenger = JObject.FromObject(p);
                                 passengerTicketStr += seat["Value"].ToString() + "," + passenger["passenger_flag"].ToString() + "," + passenger["passenger_type"].ToString()
                                     + "," + passenger["passenger_name"].ToString() + "," + passenger["passenger_id_type_code"].ToString() + "," + passenger["passenger_id_no"].ToString()
-                                    + "," + passenger["mobile_no"].ToString() + ",N_";
+                                    + "," + passenger["mobile_no"].ToString() + ",N," + passenger["allEncStr"].ToString() + "_";
+
+                                passengerTicketEncodeStr += HttpUtility.UrlEncode(seat["Value"].ToString() + "," + passenger["passenger_flag"].ToString() + "," + passenger["passenger_type"].ToString()
+    + "," + passenger["passenger_name"].ToString() + "," + passenger["passenger_id_type_code"].ToString() + "," + passenger["passenger_id_no"].ToString()
+    + "," + passenger["mobile_no"].ToString() + ",N,").ToUpper() + passenger["allEncStr"].ToString() + "_";
+
                                 oldPassengerStr += passenger["passenger_name"].ToString() + "," + passenger["passenger_type"].ToString() + "," + passenger["passenger_id_no"].ToString()
                                     + "," + passenger["passenger_id_type_code"].ToString() + "_";
                             }
@@ -383,106 +397,108 @@ namespace train12306
                             {
                                 var obj = JObject.Parse(json);
 
-                                if (obj["httpstatus"].ToString() == "200" && bool.Parse(obj["status"].ToString()))
+                                if (bool.Parse(obj["status"].ToString()))
                                 {
-
-                                    string[] resultList = obj["data"]["result"].ToString().Split('#');
-
-
-                                    #region 保存到队列中
-                                    paramsData.Clear();
-
-                                    if (obj["data"]["ifShowPassCode"].ToString() == "Y")
+                                    if (obj["data"]["submitStatus"].ToString() == "True")
                                     {
-                                        int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
-                                        int intervalTime = ifShowPassCodeTime / wait_time;
-                                        while (wait_time != 0)
+                                        string[] resultList = obj["data"]["result"].ToString().Split('#');
+                                        #region 保存到队列中
+                                        paramsData.Clear();
+
+                                        if (obj["data"]["ifShowPassCode"].ToString() == "Y")
                                         {
-                                            wait_time--;
-                                            Thread.Sleep(intervalTime);
-                                        }
-                                    }
-
-
-
-                                    paramsData.Add("train_date", getStandardTime());
-                                    paramsData.Add("train_no", train["train_no"].ToString());
-
-                                    paramsData.Add("stationTrainCode", train["train_name"].ToString());
-
-                                    paramsData.Add("seatType", seat["Value"].ToString());
-
-                                    paramsData.Add("fromStationTelecode", train["from_station"].ToString());
-                                    paramsData.Add("toStationTelecode", train["to_station"].ToString());
-                                    paramsData.Add("leftTicket", resultList[2]);
-                                    paramsData.Add("purpose_codes", purpose_codes);
-                                    paramsData.Add("_json_att", "");
-
-
-                                    json = _requestHelper.GetData("post", Api12306.getQueueCountAsyncUrl, parseDicToParams(paramsData));
-                                    Thread.Sleep(timer_time * 1000);
-                                    if (json != null && Common.IsJson(json))
-                                    {
-                                        obj = JObject.Parse(json);
-                                        if (obj["httpstatus"].ToString() == "200" && bool.Parse(obj["status"].ToString()))
-                                        {
-
-                                            #region 确认订单
-
-                                            paramsData.Clear();
-                                            paramsData.Add("passengerTicketStr", HttpUtility.UrlEncode(passengerTicketStr, Encoding.UTF8).ToUpper());
-                                            paramsData.Add("oldPassengerStr", HttpUtility.UrlEncode(oldPassengerStr, Encoding.UTF8).ToUpper());
-                                            paramsData.Add("randCode", "");
-                                            paramsData.Add("purpose_codes", purpose_codes);
-                                            paramsData.Add("key_check_isChange", resultList[1]);
-                                            paramsData.Add("leftTicketStr", resultList[2]);
-                                            paramsData.Add("train_location", resultList[0]);
-                                            paramsData.Add("choose_seats", "");
-                                            paramsData.Add("seatDetailType", "");
-                                            paramsData.Add("_json_att", "");
-
-                                            json = _requestHelper.GetData("post", Api12306.confirmSingleForQueueAsysUrl, parseDicToParams(paramsData));
-                                            if (json != null && Common.IsJson(json))
+                                            int ifShowPassCodeTime = Convert.ToInt32(obj["data"]["ifShowPassCodeTime"]);
+                                            int intervalTime = ifShowPassCodeTime / wait_time;
+                                            while (wait_time != 0)
                                             {
-                                                obj = JObject.Parse(json);
+                                                wait_time--;
+                                                Thread.Sleep(intervalTime);
+                                            }
+                                        }
 
-                                                if (obj["httpstatus"].ToString() == "200" && bool.Parse(obj["status"].ToString()))
+
+
+                                        paramsData.Add("train_date", getStandardTime());
+                                        paramsData.Add("train_no", train["train_no"].ToString());
+
+                                        paramsData.Add("stationTrainCode", train["train_name"].ToString());
+
+                                        paramsData.Add("seatType", seat["Value"].ToString());
+
+                                        paramsData.Add("fromStationTelecode", train["from_station"].ToString());
+                                        paramsData.Add("toStationTelecode", train["to_station"].ToString());
+                                        paramsData.Add("leftTicket", resultList[2]);
+                                        paramsData.Add("purpose_codes", purpose_codes);
+                                        paramsData.Add("_json_att", "");
+
+
+                                        json = _requestHelper.GetData("post", Api12306.getQueueCountAsyncUrl, parseDicToParams(paramsData));
+                                        Thread.Sleep(timer_time * 1000);
+                                        if (json != null && Common.IsJson(json))
+                                        {
+                                            obj = JObject.Parse(json);
+                                            if (bool.Parse(obj["status"].ToString()))
+                                            {
+
+                                                #region 确认订单
+
+                                                paramsData.Clear();
+                                                paramsData.Add("passengerTicketStr", passengerTicketEncodeStr);
+                                                paramsData.Add("oldPassengerStr", HttpUtility.UrlEncode(oldPassengerStr, Encoding.UTF8).ToUpper());
+                                                paramsData.Add("randCode", "");
+                                                paramsData.Add("purpose_codes", purpose_codes);
+                                                paramsData.Add("key_check_isChange", resultList[1]);
+                                                paramsData.Add("leftTicketStr", resultList[2]);
+                                                paramsData.Add("train_location", resultList[0]);
+                                                paramsData.Add("choose_seats", "");
+                                                paramsData.Add("seatDetailType", "");
+                                                paramsData.Add("_json_att", "");
+
+                                                json = _requestHelper.GetData("post", Api12306.confirmSingleForQueueAsysUrl, parseDicToParams(paramsData));
+                                                if (json != null && Common.IsJson(json))
                                                 {
+                                                    obj = JObject.Parse(json);
 
-                                                    if (bool.Parse(obj["data"]["submitStatus"].ToString()))
+                                                    if (bool.Parse(obj["status"].ToString()))
                                                     {
-                                                        txtMessage.AppendText("刷票成功，请在30分钟去12306官网支付订单。\r\n");
-                                                        btnStop_Click(null, null);
-                                                        #region 发送邮件和播放背景音乐
-                                                        playMusic();
-                                                        if (txtEmail.Text != "")
+
+                                                        if (bool.Parse(obj["data"]["submitStatus"].ToString()))
                                                         {
-                                                            EmailHelper.SendMail(txtEmail.Text, "抢票成功！",
-                                                                $"【归途】提醒您，您成功抢到{train["from_station_name"].ToString()}" +
-                                                                $"到{train["to_station_name"].ToString()}的{train["train_name"].ToString()}列车。出发时间为：{train["from_time"].ToString()}" +
-                                                                $",到达时间为：{train["to_time"].ToString()}。请您在30分钟内登录12306去支付订单，为期作废！");
+                                                            txtMessage.AppendText("刷票成功，请在30分钟去12306官网支付订单。\r\n");
+                                                            btnStop_Click(null, null);
+                                                            #region 发送邮件和播放背景音乐
+                                                            playMusic();
+                                                            if (txtEmail.Text != "")
+                                                            {
+                                                                EmailHelper.SendMail(txtEmail.Text, "抢票成功！",
+                                                                    $"【归途】提醒您，您成功抢到{train["from_station_name"].ToString()}" +
+                                                                    $"到{train["to_station_name"].ToString()}的{train["train_name"].ToString()}列车。出发时间为：{train["from_time"].ToString()}" +
+                                                                    $",到达时间为：{train["to_time"].ToString()}。请您在30分钟内登录12306去支付订单，为期作废！");
+                                                            }
+                                                            #endregion
                                                         }
-                                                        #endregion
+                                                        else
+                                                            txtMessage.AppendText(obj["data"]["errMsg"].ToString() + "\r\n");
+
+
+
+
                                                     }
                                                     else
-                                                        txtMessage.AppendText(obj["data"]["errMsg"].ToString() + "\r\n");
-
-
-
+                                                        txtMessage.AppendText(JArray.Parse(obj["messages"].ToString())[0].ToString() + "\r\n");
 
                                                 }
-                                                else
-                                                    txtMessage.AppendText(JArray.Parse(obj["messages"].ToString())[0].ToString() + "\r\n");
 
+                                                #endregion
                                             }
-
-                                            #endregion
+                                            else
+                                                txtMessage.AppendText(JArray.Parse(obj["messages"].ToString())[0].ToString() + "\r\n");
                                         }
-                                        else
-                                            txtMessage.AppendText(JArray.Parse(obj["messages"].ToString())[0].ToString() + "\r\n");
-                                    }
 
-                                    #endregion
+                                        #endregion
+                                    }
+                                    else
+                                        txtMessage.AppendText(obj["data"]["errMsg"].ToString() + "\r\n");
                                 }
                                 else
                                     txtMessage.AppendText(JArray.Parse(obj["messages"].ToString())[0].ToString() + "\r\n");

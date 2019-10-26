@@ -110,10 +110,17 @@ namespace train12306
             }
         }
 
+        /// <summary>
+        /// 添加cookie，不存在添加，存在则修改
+        /// </summary>
+        /// <param name="name">key</param>
+        /// <param name="value">value</param>
         public void AddCookie(string name,string value)
         {
-            if(!cookies.ContainsKey(name))
-            cookies.Add(name, new Cookie { Name = name, Value = value, Domain = "kyfw.12306.cn" });
+            if (!cookies.ContainsKey(name))
+                cookies.Add(name, new Cookie { Name = name, Value = value, Domain = "kyfw.12306.cn" });
+            else
+                cookies[name].Value = value;
         }
     }
 }
