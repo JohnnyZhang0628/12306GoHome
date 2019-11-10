@@ -1,5 +1,4 @@
-﻿
-﻿# 12306GoHome
+# 12306GoHome
 ### 2019自动抢票CS版,帮助大家的麻烦点一个star。
 
 ## [下载最新版](https://github.com/JohnnyZhang0628/12306GoHome/releases)
