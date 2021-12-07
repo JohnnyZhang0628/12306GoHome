@@ -1,38 +1,15 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.IO;
+using System.Threading.Tasks;
 
 namespace train12306
 {
-    static class Program
+    internal class Program
     {
-        /// <summary>
-        /// 应用程序的主入口点。
-        /// </summary>
-        [STAThread]
-        static void Main()
+        public static async Task Main()
         {
-            try
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FrmLogin());
-            }
-
-            catch(Exception ex)
-            {
-                Common.WriteLog(ex);
-            }
-
+            var train = new Train();
+            await train.StartAsync();
+            Console.ReadKey();
         }
-
-
-        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs ex)
-        {
-            Common.WriteLog(ex.Exception);
-        }
-
-
-
     }
 }
