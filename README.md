@@ -1,21 +1,19 @@
 # 12306GoHome
-### 2021自动抢票CS版,帮助大家的麻烦点一个star。
+### 2021自动抢票B/S版,帮助大家的麻烦点一个star。
 
 ## [下载最新版](https://github.com/JohnnyZhang0628/12306GoHome/releases)
 
 ## 【版本更新】
-### 2021-12-07 版本：V2.0 基于控制浏览器来实现自动抢票。
+### 2021-12-07 版本：2.0.0.1 基于控制浏览器来实现自动抢票。
 ### 2019-05-12 版本：1.0.0.11 发布手机扫码登陆。由于账号、密码登陆设备号一直会变，所以希望大家多用扫码登陆。
 ### 2019-04-09 版本：1.0.0.11 新增获取设备号，防止登录失败。后期可能会调用第三方解码工具，不用输入验证码。
 ### 2019-03-07 版本：1.0.0.10 修改线程休眠时间，抢票3s内可以完成。
 ### 2019-03-06 版本：1.0.0.9 新增动态获取api，和买票成功后播放音乐。
 ### 2019-03-05 版本：1.0.0.8 新增双击车次查看价格、新增双击出发站查看停靠站、修改出发站、终点站搜索BUG问题。
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/station.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/price.png)
 
 ## 【安装】
-### 2.0 
-1、首先安装[.NET 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+### 2.0 版本
+1、首先安装[.NET 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)，不同操作系统要下载不同版本。
 
 2、运行`install.bat`安装插件
 
@@ -23,19 +21,9 @@
 
 3、运行`start.bat`
 
-4、等待浏览器运行，然后扫码登录。剩下软件会自动买票
+4、等待浏览器运行，然后扫码登录。剩下软件会自动买票。
 
 
-### 1.0版本
-
-直接在release文件夹setup.exe 安装（或者application files/trian12306/trian12306.exe 直接打开免安装）。
-
-## 买票步骤【严格按照流程走，12306会分析你买票步骤，如果顺序错了，有可能提示非法请求】
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/step.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/login.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/main.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/success.png)
-![Image text](https://github.com/JohnnyZhang0628/12306GoHome/blob/master/train12306/image/order.png)
 
 ## 【介绍】
 ### 软件标题：归途
